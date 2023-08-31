@@ -154,7 +154,7 @@ class ArticleController extends Controller
         if($article->hasMedia('image')){
             $article->getFirstMedia('image')->delete();
         }
-        
+
         $article->delete();
 
         toast('Your data has been deleted!', 'success');
