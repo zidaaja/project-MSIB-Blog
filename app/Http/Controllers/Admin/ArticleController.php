@@ -122,7 +122,26 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $data = $request->validate([
+            'title' => 'string|required',
+            'content' => 'string|nullable',
+            'articel_category_id' => 'required',
+            // 'image' => 'required'
+        ]);
+            $data['slug'] = Str::slug($request->title);
+            $data['user_id'] = Auth()->user()->id;
+            $article->update($data);
+
+            if($request->hasFile('image')){
+                if($article->hasMedia('image')){
+                    $article->getFirstMedia('image')->delete();
+                }
+                $article->addMediaFromRequest('image')->toMediaCollection('image');
+            }
+
+        toast('Your Article has been updated!','success');
+        return redirect()->route('admin.article.index');
     }
 
     /**

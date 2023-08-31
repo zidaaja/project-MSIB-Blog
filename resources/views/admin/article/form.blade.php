@@ -58,15 +58,15 @@
                         </div>
 
                         @if (@$article)
-                            <div class="form-label fw-semibold mb-1">Old Image</div>
+                            <div class="form-label fw-semibold mb-1">Old Cover Image</div>
                             <img class="mb-4" src=" {{ $article->getFirstMediaUrl('image') }}"
                             style="max-width: 200px; height: auto">
 
                         @endif
 
                         <div class="mb-4">
-                            <label for="image" class="form-label fw-semibold">{{ @$article ? 'New' : 'Choose'}} Image</label>
-                            <input type="file" name="image" id="image" class="form-control" value="{{@$article ? old('images', @$article->getFirstMediaUrl('image')) : ''}}" required>
+                            <label for="image" class="form-label fw-semibold">{{ @$article ? 'New' : 'Choose'}} Cover Image</label>
+                            <input type="file" name="image" id="image" class="form-control" value="{{@$article ? old('image', @$article->getFirstMediaUrl('image')) : ''}}" {{ @$article ? '' : 'required' }}>
                         </div>
 
 
@@ -81,7 +81,12 @@
 
                             </div>
 
-                        <button type="submit" class="btn btn-info" style="float: right">{{ @$article ? 'Save' : 'Submit' }}</button>
+                        <div class="col" style="float: right">
+                            <a class="btn btn-outline-info me-1" href="{{ route('admin.article.index') }}" >Cancel
+                            </a>
+                        <button type="submit" class="btn btn-info">{{ @$article ? 'Save' : 'Submit' }}</button>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -109,26 +114,57 @@
             reader.readAsDataURL(file);
         });
     </script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
-    <script>
+    {{-- <script>
         ClassicEditor
             .create(document.querySelector('#editor'))
             .catch(error => {
                 console.error(error);
             });
-    </script>
-    {{-- <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ),{
-                ckfinder: {
-                    // uploadUrl: ''?_token='.csrf_token()}}',
-                }
-            })
-            .catch( error => {
-
-            } );
     </script> --}}
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                ckfinder: {
+                    uploadUrl: '{{ route("admin.ckeditor.upload") }}'
+                },
+            })
+            .then(editor => {
+                editor.plugins.get('FileRepository').createUploadAdapter = function (loader) {
+                    return new MyUploadAdapter(loader);
+                };
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        class MyUploadAdapter {
+            constructor(loader) {
+                this.loader = loader;
+            }
+
+            upload() {
+                return this.loader.file.then(file => new Promise((resolve, reject) => {
+                    const formData = new FormData();
+                    formData.append('upload', file);
+
+                    axios.post('{{ route("admin.ckeditor.upload") }}', formData).then(response => {
+                        resolve({
+                            default: response.data.url
+                        });
+                    }).catch(error => {
+                        reject(error);
+                    });
+                }));
+            }
+        }
+
+
+
+
+    </script>
 
 </x-app-layout>

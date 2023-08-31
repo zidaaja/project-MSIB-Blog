@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\CKEditorController as AdminCKEditorController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +43,8 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
 
 
     Route::get('setting/{user}', [AdminDashboardController::class, 'setting'])->name('setting');
+
+    Route::post('/ckeditor/upload', [AdminCKEditorController::class, 'upload'])->name('ckeditor.upload');
 
 
 });
