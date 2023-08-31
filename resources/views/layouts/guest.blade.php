@@ -21,7 +21,7 @@
 
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="h-screen flex flex-col sm:justify-center items-center sm:pt-0 bg-no-repeat bg-guest">
+        <div class="h-screen flex flex-col items-center bg-no-repeat bg-guest p-5">
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
