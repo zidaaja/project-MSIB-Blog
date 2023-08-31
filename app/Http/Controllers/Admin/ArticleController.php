@@ -149,7 +149,13 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        Article::destroy($id);
+        $article = Article::findOrFail($id);
+
+        if($article->hasMedia('image')){
+            $article->getFirstMedia('image')->delete();
+        }
+        
+        $article->delete();
 
         toast('Your data has been deleted!', 'success');
         return redirect()->back();

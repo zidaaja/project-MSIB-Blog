@@ -17,7 +17,7 @@ class ArticelCategorySeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('articel_categories')->truncate();
         $data = [
-            'Teknologi', 'Kesehatan', 'Industri', 'Pendidikan', 'Makanan'
+            'Web Development', 'UI/UX Design', 'Graphic Design'
         ];
 
         foreach ($data as $d) {
