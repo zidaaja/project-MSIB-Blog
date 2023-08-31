@@ -1,3 +1,10 @@
+@push('styles')
+<style>
+    .ck-editor__editable_inline {
+        min-height: 200px;
+    }
+    </style>
+@endpush
 <x-app-layout>
     <!-- Content -->
     <div class="content container-fluid">
@@ -33,12 +40,12 @@
                         <div class="mb-4">
                             <label class="form-label fw-semibold" for="title">Title</label>
                             <input type="text" id="title" class="form-control" name="title"
-                                placeholder="Judul Arikel..." value="">
+                                placeholder="Judul Arikel..." value="{{ old('title', @$article->title) }}" required>
                         </div>
 
                         <div class="mb-4">
                             <label class="form-label fw-semibold" for="category">Category</label>
-                            <select name="articel_category_id" class="form-select" aria-label="Select by Category">
+                            <select name="articel_category_id" class="form-select" aria-label="Select by Category" required>
                                 <option>Pilih Kategori</option>
                                 @foreach ($articel_categories as $item)
                                 <option value="{{ $item->id }}"
@@ -50,18 +57,27 @@
                             </select>
                         </div>
 
+                        @if (@$article)
+                            <div class="form-label fw-semibold mb-1">Old Image</div>
+                            <img class="mb-4" src=" {{ $article->getFirstMediaUrl('image') }}"
+                            style="max-width: 200px; height: auto">
+
+                        @endif
+
                         <div class="mb-4">
-                            <label for="image" class="form-label fw-semibold">Choose Image</label>
-                            <input type="file" name="image" id="image" class="form-control">
+                            <label for="image" class="form-label fw-semibold">{{ @$article ? 'New' : 'Choose'}} Image</label>
+                            <input type="file" name="image" id="image" class="form-control" value="{{@$article ? old('images', @$article->getFirstMediaUrl('image')) : ''}}" required>
                         </div>
+
+
+
                         <div class="mb-4">
                             <img src="#" id="preview-image" style="display:none; width:200px;">
                         </div>
 
                         <div class="mb-4" >
                             <label class="form-label fw-semibold" for="content">Content</label>
-                                <textarea id="editor" name="content" class="form-control" placeholder="Tulis Content..." rows="4" >{{ @$article->content}}</textarea>
-            {{-- <textarea name="editor" id="editor"></textarea> --}}
+                                <textarea id="editor" name="content" class="form-control" placeholder="Tulis Content..." rows="4">{{ @$article->content}}</textarea>
 
                             </div>
 

@@ -21,8 +21,8 @@ class ArticleController extends Controller
     public function index()
     {
         $data = [
-            'articles' => Article::all(),
-            'articel_categories' => $this->articel_categories,
+            'articles' => Article::with('articel_category')->latest()->filter(request())->paginate(5),
+            'articel_category' => $this->articel_categories,
         ];
          return view('admin.article.index', $data);
     }
@@ -46,10 +46,19 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        $data = $request->all();
+        $data = $request->validate([
+            'title' => 'string|required',
+            'content' => 'string|nullable',
+            'articel_category_id' => 'required',
+            'image' => 'required'
+        ]);
             $data['slug'] = Str::slug($request->title);
             $data['user_id'] = Auth()->user()->id;
             $article = Article::create($data);
+
+            if($request->hasFile('image')){
+                $article->addMediaFromRequest('image')->toMediaCollection('image');
+            }
 
             //return succes
         toast('Your article has been created!','success');
@@ -99,7 +108,13 @@ class ArticleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = [
+            'article' => Article::findOrFail($id),
+            'url' => route('admin.article.update', $id),
+            'articel_categories' => $this->articel_categories,
+
+        ];
+        return view('admin.article.form', $data);
     }
 
     /**

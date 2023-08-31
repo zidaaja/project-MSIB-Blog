@@ -36,11 +36,11 @@
 
               <div class="col-sm-6 col-md-3">
                 <!-- Select -->
-                <select name="unit" class="form-select" onchange="form.submit()">
+                <select name="articel_category" class="form-select" onchange="form.submit()">
                     <option value="">Semua Kategori</option>
-                    @foreach ($articel_categories as $item)
+                    @foreach ($articel_category as $item)
                         <option value="{{ $item->slug }}"
-                            {{ @$_GET['articel_categories'] == $item->slug ? 'selected' : ''}}>
+                            {{ @$_GET['articel_category'] == $item->slug ? 'selected' : ''}}>
                             {{ $item->name }}
                         </option>
                     @endforeach
@@ -120,17 +120,9 @@
                                     {{-- </td> --}}
                                     <td>Test</td>
                                     <td>
-                                        {{-- <a name="" id="" class="btn btn-outline-primary btn-sm"
-                                            href="{{ route('admin.achievement.edit', $achievement) }}">Edit</a>
-                                        <a name="" id="" class="btn btn-outline-info btn-sm"
-                                            href="{{ route('admin.achievement.show', $achievement) }}">Show</a>
-                                        <form action="{{ route('admin.achievement.destroy', $achievement) }}" method="POST" class="d-inline">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
-                                        </form> --}}
+
                                         <a name="" id="" class="btn btn-xs btn-outline-primary rounded-5"
-                                        href=""><i class="bi-pen"></i></a>
+                                        href="{{ route('admin.article.edit', $article) }}"><i class="bi-pen"></i></a>
                                     <a name="" id="" class="btn btn-xs btn-outline-info rounded-5"
                                         href=""><i class="bi-eye"></i></a>
                                     <form action="{{ route('admin.article.destroy', $article) }}" method="POST" class="d-inline">
@@ -150,7 +142,7 @@
                 </div>
             </div>
         </div>
-            {{-- {{ $achievements->withQueryString()->links()}} --}}
+            {{ $articles->withQueryString()->links()}}
     </div>
     <!-- End Content -->
 

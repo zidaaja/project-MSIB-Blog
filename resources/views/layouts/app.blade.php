@@ -60,11 +60,7 @@
             opacity: 0;
         }
     </style>
-    <style>
-        .ck-editor__editable_inline {
-            min-height: 200px;
-        }
-        </style>
+    
 
 
     <script>
