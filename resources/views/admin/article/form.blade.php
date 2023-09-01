@@ -44,9 +44,10 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label fw-semibold" for="description">Description</label>
-                            <input type="text" id="description" class="form-control" name="description"
-                                placeholder="Judul Arikel..." value="{{ old('description', @$article->description) }}" required>
+                            <label class="form-label fw-semibold" for="description">Sub Title</label>
+                            <textarea id="description" name="description" class="form-control" placeholder="Tulis Sub Judul..." rows="3">{{ @$article->description }}</textarea>
+                            {{-- <input type="text" id="description" class="form-control" name="description"
+                                placeholder="Sub Judul Arikel..." value="{{ old('description', @$article->description) }}" required> --}}
                         </div>
 
                         <div class="mb-4">
