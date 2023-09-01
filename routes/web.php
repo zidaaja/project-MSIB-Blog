@@ -3,7 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\CKEditorController as AdminCKEditorController;
+
 
 
 use Illuminate\Support\Facades\Route;
@@ -25,7 +28,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard'); 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -59,6 +62,18 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
 
 Route::get('ckeditor', function () {
     return view('admin.article.ckeditor');
+});
+
+Route::get('/home', [HomeController::class, 'index']);
+
+Route::get('/blog', [BlogController::class, 'index']);
+
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/blog-detail', function () {
+    return view('blog-detail');
 });
 
 require __DIR__.'/auth.php';
