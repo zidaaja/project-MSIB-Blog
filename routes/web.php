@@ -39,7 +39,15 @@ Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(functi
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('article', AdminArticleController::class);
-    Route::post('article-category', [AdminArticleController::class, 'category'])->name('article.category');
+    Route::post('article-publish/{article}', [AdminArticleController::class, 'publish'])->name('article.publish');
+    Route::get('article-category', [AdminArticleController::class, 'category'])->name('article.category');
+    Route::post('article-category_store', [AdminArticleController::class, 'category_store'])->name('article.category_store');
+    Route::put('article-category_update/{category}', [AdminArticleController::class, 'category_update'])->name('article.category_update');
+    Route::delete('article-category_destroy/{category}', [AdminArticleController::class, 'category_destroy'])->name('article.category_destroy');
+
+
+    // Route::put('article-category', [AdminArticleController::class, 'category'])->name('article.category');
+
 
 
     Route::get('setting/{user}', [AdminDashboardController::class, 'setting'])->name('setting');
