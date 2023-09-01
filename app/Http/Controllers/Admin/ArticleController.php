@@ -78,7 +78,13 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $article = Article::findOrFail($id);
+
+        $data = [
+            'article' => $article,
+        ];
+
+        return view('admin.article.detail', $data);
     }
 
     /**

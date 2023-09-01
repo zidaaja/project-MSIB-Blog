@@ -116,14 +116,14 @@
                                     </td>
                                     <td>
 
-                                        <a name="" id="" class="btn btn-xs btn-outline-primary rounded-5"
+                                        <a name="" id="" class="btn btn-xs btn-outline-primary rounded-pill"
                                         href="{{ route('admin.article.edit', $article) }}"><i class="bi-pen"></i></a>
-                                    {{-- <a name="" id="" class="btn btn-xs btn-outline-info rounded-5"
-                                        href=""><i class="bi-eye"></i></a> --}}
+                                    <a name="" id="" class="btn btn-xs btn-outline-info rounded-pill"
+                                        href="{{ route('admin.article.show', $article) }}"><i class="bi-eye"></i></a>
                                     <form action="{{ route('admin.article.destroy', $article) }}" method="POST" class="d-inline">
                                         @method('DELETE')
                                         @csrf
-                                        <button class="btn btn-outline-danger btn-xs delete-btn rounded-5"><i class="bi-trash"></i></button>
+                                        <button class="btn btn-outline-danger btn-xs delete-btn rounded-pill"><i class="bi-trash"></i></button>
                                     </form>
                                     </td>
                                 </tr>
