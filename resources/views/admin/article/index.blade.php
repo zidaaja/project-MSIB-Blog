@@ -118,8 +118,8 @@
 
                                         <a name="" id="" class="btn btn-xs btn-outline-primary rounded-5"
                                         href="{{ route('admin.article.edit', $article) }}"><i class="bi-pen"></i></a>
-                                    <a name="" id="" class="btn btn-xs btn-outline-info rounded-5"
-                                        href=""><i class="bi-eye"></i></a>
+                                    {{-- <a name="" id="" class="btn btn-xs btn-outline-info rounded-5"
+                                        href=""><i class="bi-eye"></i></a> --}}
                                     <form action="{{ route('admin.article.destroy', $article) }}" method="POST" class="d-inline">
                                         @method('DELETE')
                                         @csrf
