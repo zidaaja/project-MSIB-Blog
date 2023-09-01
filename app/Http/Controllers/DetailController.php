@@ -7,10 +7,10 @@ use App\Models\Article;
 
 class DetailController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        $article = Article::All();
+        $article = Article::findOrFail($id);
 
-        return view('home', ['article' => $article]);
+        return view('blog-detail', ['article' => $article]);
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\Admin\CKEditorController as AdminCKEditorController;
 
 
@@ -74,8 +75,6 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/blog-detail', function () {
-    return view('blog-detail');
-});
+Route::get('/blog-detail/{id}', [DetailController::class, 'index'])->name('blog-detail');
 
 require __DIR__.'/auth.php';
