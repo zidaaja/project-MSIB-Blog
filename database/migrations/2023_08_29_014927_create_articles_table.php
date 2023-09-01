@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('articel_category_id');
             $table->foreignId('user_id');
+            $table->tinyInteger('is_published')->default(0);
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('content');

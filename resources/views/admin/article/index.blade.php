@@ -10,10 +10,9 @@
                 <!-- End Col -->
 
                 <div class="col-auto">
-                    <button class="btn btn-soft-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="bi-plus-lg me-1"></i>New Category
-                    </button>
-                    @include('admin.article.category')
+                    <a class="btn btn-soft-info" href="{{ route('admin.article.category') }}">
+                        <i class="bi-tags-fill me-2"></i>Article Categories
+                    </a>
                     <a class="btn btn-info" href="{{ route('admin.article.create') }}">
                         <i class="bi-plus-lg me-1"></i> Create
                     </a>
@@ -60,7 +59,7 @@
                   <input type="search" class="form-control form-control-lg" id="search" name="search" value="{{@$_GET['search'] }}" placeholder="Cari Project" aria-label="Search job"> --}}
                   <div class="input-group input-group-merge">
 
-                    <input type="text" class="form-control" placeholder="Search for Title ..." aria-label="Search" name="search" value="{{ @$_GET['search'] }}">
+                    <input type="search" class="form-control" placeholder="Search for Title ..." aria-label="Search" name="search" value="{{ @$_GET['search'] }}">
                     {{-- <button class="btn btn-warning"><i class="bi-search"><a href="{{ @$_GET['search'] }}"></a></i></button> --}}
                   </div>
 
@@ -107,18 +106,14 @@
                                     <td>{{ $article->user->name}}</td>
 
 
-                                    {{-- <td class="bg-dark"> --}}
-                                        {{-- <form class="publishForm" action="{{ route('admin.achievement.publish', $achievement->id) }}" method="POST"> --}}
-                                        {{-- <form class="publishForm" action="" method="POST">
-
+                                    <td>
+                                        <form class="publishForm mt-1" action="{{ route('admin.article.publish', $article) }}" method="POST">
                                             @csrf
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input publishSwitch" type="checkbox" name="is_published" {{ $achievement->is_published ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="publishSwitch">{{ $achievement->is_published ? '' : '' }}</label>
+                                            <div class="form-check form-switch item-center ">
+                                                <input class="form-check-input is-valid publishSwitch position-absolute" type="checkbox" name="is_published" {{ $article->is_published ? 'checked' : 'uncheked' }}>
                                             </div>
-                                        </form> --}}
-                                    {{-- </td> --}}
-                                    <td>Test</td>
+                                        </form>
+                                    </td>
                                     <td>
 
                                         <a name="" id="" class="btn btn-xs btn-outline-primary rounded-5"
@@ -146,5 +141,6 @@
     </div>
     <!-- End Content -->
 
+    @include('scripts.publish')
     @include('scripts.delete')
 </x-app-layout>

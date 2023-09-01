@@ -1,68 +1,118 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Category</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<x-app-layout>
+    <!-- Content -->
+    <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h1 class="page-header-title">Article Categories</h1>
+                </div>
+                <!-- End Col -->
 
+                <div class="col-auto">
+                    <a class="btn btn-soft-info" href="{{ route('admin.article.index') }}">
+                        <i class="bi-arrow-left"></i>
+                    </a>
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="bi-plus-lg me-1"></i>New Category
+                    </button>
+                    @include('admin.article.category_store')
+
+                    {{-- <a class="btn btn-info" href="{{ route('admin.article.create') }}">
+                        <i class="bi-plus-lg me-1"></i> Create
+                    </a> --}}
+
+                </div>
+                <!-- End Col -->
             </div>
-            <div class="modal-body">
-                <form action="{{ route('admin.article.category')}}" method="post">
-                    {{-- @if (@$jobdesk)
-                        @method('PUT')
-                    @endif --}}
-                    @csrf
-                    {{-- <div class="mb-3">
-                        <label for="name" class="form-label">Job Name</label>
-                        <a href="javascript:;" class="addGainer form-link mb-2"><i class="bi-plus-circle me-1"></i>Add Gainer</a>
-
-                        <input type="text" name="name" id="name" value="{{old('name', @$jobdesk->name)}}" class="form-control">
-                        <a href="javascript:;" class="addGainer form-link mb-2"><i class="bi-plus-circle me-1"></i>Add Gainer</a>
-
-                    </div> --}}
-                    {{-- <div class="form-group row">
-                        <label class="col-2 col-form-label"></label>
-                        <div class="col-sm-10 text-end">
-                            <a href="javascript:;" class="addJobdesk form-link mb-2"><i class="bi-plus-circle me-2"></i>Add Job</a>
-                        </div>
-                    </div> --}}
+            <!-- End Row -->
+        </div>
+        <!-- End Page Header -->
 
 
 
-                    <div class="form-group row mb-1 align-tems-center">
-                        <label class="col-sm-2 col-form-label text-end">Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="name[]" value="{{ old('name', @$category->name) }}"
-                                placeholder="Enter Category Name..." required>
-                        </div>
-                    </div>
+        <div class="card mb-3">
+            <div class="card p-3">
+              <!-- Form -->
+          <form>
+            <div class="row gx-2 gx-md-5 col-sm-divider">
 
-                    <div class="jobdesk"></div>
 
-                    <div class="form-group row">
-                        <label class="col-2 col-form-label"></label>
-                        <div class="col-sm-10 text-end">
-                            <a href="javascript:;" class="addJobdesk form-link mb-2"><i class="bi-plus-circle me-2"></i>More Category</a>
-                        </div>
-                    </div>
 
-                    {{-- <div class="form-group row mb-3">
-                        <label class="col-sm-2 col-form-label text-end">From</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="from[]" value="{{old('from', @$achievement->gainer->from)}}"
-                                placeholder="From..., Ex: Jakarta" required>
-                        </div>
 
-                    </div> --}}
+              <div class="col-md-11">
 
-                    {{-- <div class="jobdesk"></div> --}}
-                    @include('scripts.jobmodal')
+                <!-- Form -->
+                <div class="input-group input-group-merge input-group-sm">
+                  {{-- <span class="input-group-prepend input-group-text">
+                    <i class="bi-search"></i>
+                  </span>
+                  <input type="search" class="form-control form-control-lg" id="search" name="search" value="{{@$_GET['search'] }}" placeholder="Cari Project" aria-label="Search job"> --}}
+                  <div class="input-group input-group-merge">
+
+                    <input type="search" class="form-control" placeholder="Search for Category name ..." aria-label="Search" name="search" value="{{ @$_GET['search'] }}">
+                    {{-- <button class="btn btn-warning"><i class="bi-search"><a href="{{ @$_GET['search'] }}"></a></i></button> --}}
+                  </div>
+
+                </div>
+                <!-- End Form -->
+              </div>
+              <!-- End Col -->
+
+              <div class="col-md-1">
+                <button class="btn btn-soft-info"><i class="bi-search"><a href="{{ @$_GET['search'] }}"></a></i></button>
+              </div>
+              <!-- End Col -->
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-info">Submit</button>
-                </form>
+            <!-- End Row -->
+          </form>
+          <!-- End Form -->
+            </div>
+          </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4 class="card-title">Data Categories</h4>
+                <div class="table-responsive">
+                    <table class="table table-thead-bordered">
+                        <thead class="thead-light">
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Category</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-align-middle">
+                            @forelse ($articel_category as $category)
+                                <tr class="text-center">
+                                    <td>{{ $loop->iteration}}</td>
+                                    <td>{{ $category->name}}</td>
+                                    <td>
+                                        <button class="btn btn-xs btn-outline-primary rounded-5" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $category->id }}">
+                                            <i class="bi-pen"></i>
+                                        </button>
+                                        @include('admin.article.category_update', ['category' => $category])
+
+                                    <form action="{{ route('admin.article.category_destroy', $category) }}" method="POST" class="d-inline">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-danger btn-xs delete-btn rounded-5"><i class="bi-trash"></i></button>
+                                    </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="55" class="text-center pt-5">No Data</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+            {{ $articel_category->withQueryString()->links()}}
     </div>
-</div>
+    <!-- End Content -->
+
+    @include('scripts.delete')
+</x-app-layout>
