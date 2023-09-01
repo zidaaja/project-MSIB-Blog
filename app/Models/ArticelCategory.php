@@ -27,4 +27,13 @@ class ArticelCategory extends Model
     {
         return $this->hasMany(Article::class);
     }
+
+    public function scopeFilter($query, $params)
+    {
+        if (@$params['search']) {
+            $query->where('name', 'like', '%'.$params['search'].'%');
+        }
+
+
+    }
 }

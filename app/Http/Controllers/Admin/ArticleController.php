@@ -65,35 +65,12 @@ class ArticleController extends Controller
         return to_route('admin.article.index');
     }
 
-    public function category(Request $request)
-    {
 
-        // $article = Article::findOrFail($id);
 
-        $data = $request->validate([
-            'name' => 'required',
-        ]);
 
-        if ($request->name) {
-            foreach ($data['name'] as $item => $value) {
-                $data2 = array(
-                    // 'project_id' => $project->id,
-                    'name' => $data['name'][$item],
-                    'slug' => Str::slug($data['name'][$item]),
-                );
-                ArticelCategory::create($data2);
-            };
-        };
 
-        // $data['slug'] = Str::slug($request->name);
-        // $data['project_id'] = $project->id;
 
-        // $jobdesk = Jobdesk::create($data);
 
-        toast('New Category has been added!', 'success');
-        // toast($jobdesk->name.' has been added!','success');
-        return back();
-    }
 
     /**
      * Display the specified resource.
@@ -149,7 +126,87 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        Article::destroy($id);
+        $article = Article::findOrFail($id);
+
+        if($article->hasMedia('image')){
+            $article->getFirstMedia('image')->delete();
+        }
+
+        $article->delete();
+
+        toast('Your data has been deleted!', 'success');
+        return redirect()->back();
+    }
+
+    public function publish($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->is_published = !$article->is_published;
+        $article->save();
+
+        if ($article->is_published) {
+            toast($article->title . ' has been published', 'success');
+        } else {
+            toast($article->title . ' was unpublished!', 'info');
+        }
+        return redirect()->back();
+    }
+
+    public function category()
+    {
+        $data = [
+            'url' => route('admin.article.category_store'),
+            'articel_category' => ArticelCategory::filter(request())->paginate(5),
+        ];
+        return view('admin.article.category', $data);
+    }
+
+    public function category_store(Request $request)
+    {
+
+
+        $data = $request->validate([
+            'name' => 'required',
+        ]);
+
+        if ($request->name) {
+            foreach ($data['name'] as $item => $value) {
+                $data2 = array(
+                    'name' => $data['name'][$item],
+                    'slug' => Str::slug($data['name'][$item]),
+                );
+                ArticelCategory::create($data2);
+            };
+        };
+
+
+
+        toast('Category has been added!', 'success');
+        return back();
+    }
+
+    public function category_update(Request $request, String $id)
+    {
+
+
+        $articel_category = ArticelCategory::findOrFail($id);
+
+        $data = $request->validate([
+            'name' => 'required',
+        ]);
+        $data['slug'] = Str::slug($request->name);
+
+        $articel_category->update($data);
+
+        toast('Category has been updated!', 'success');
+
+        return redirect()->back();
+    }
+    public function category_destroy(string $id)
+    {
+        ArticelCategory::destroy($id);
+
+
 
         toast('Your data has been deleted!', 'success');
         return redirect()->back();
