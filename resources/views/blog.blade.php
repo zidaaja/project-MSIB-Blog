@@ -38,10 +38,10 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($category->articles as $article)
             <a href="#" class="bg-white rounded-lg overflow-hidden shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-                <img src="https://via.placeholder.com/400x200" alt="Blog Post" class="w-full h-48 object-cover object-center">
+                <img src="{{ $article->getFirstMediaUrl('image') }}" alt="Blog Post" class="w-full h-48 object-cover object-center">
                 <div class="p-6">
                     <h2 class="text-xl font-semibold mb-2">{{ $article->title }}</h2>
-                    <p class="text-gray-600">{{ $article->content }}</p>
+                    <p class="text-gray-600">{{ $article->description }}</p>
                     <div class="mt-4">
                         <span class="text-purple-400">Read more</span>
                     </div>

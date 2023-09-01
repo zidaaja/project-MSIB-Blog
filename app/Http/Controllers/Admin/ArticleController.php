@@ -48,6 +48,7 @@ class ArticleController extends Controller
         // return $request;
         $data = $request->validate([
             'title' => 'string|required',
+            'description' => 'string|required',
             'content' => 'string|nullable',
             'articel_category_id' => 'required',
             'image' => 'required'
@@ -102,6 +103,7 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
         $data = $request->validate([
             'title' => 'string|required',
+            'description' => 'string|required',
             'content' => 'string|nullable',
             'articel_category_id' => 'required',
             // 'image' => 'required'

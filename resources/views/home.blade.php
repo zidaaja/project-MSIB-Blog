@@ -60,10 +60,10 @@
         @foreach ($article as $data)
             @if ($counter < 6)
                 <a href="#" class="bg-white rounded-lg overflow-hidden shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-                    <img src="https://via.placeholder.com/400x200" alt="Blog Post" class="w-full h-48 object-cover object-center">
+                    <img src="{{ $data->getFirstMediaUrl('image') }}" alt="Blog Post" class="w-full h-48 object-cover object-center">
                     <div class="p-6">
                         <h2 class="text-xl font-semibold mb-2">{{ $data -> title}}</h2>
-                        <p class="text-gray-600">{{ $data->content }}</p>
+                        <p class="text-gray-600">{{ $data->description }}</p>
                     </div>
                 </a>
                 @php

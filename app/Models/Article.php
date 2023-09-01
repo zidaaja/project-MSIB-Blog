@@ -20,7 +20,7 @@ class Article extends Model implements HasMedia
      *
      * @var array
      */
-    protected $fillable = [ 'title', 'slug', 'content', 'articel_category_id', 'user_id', 'is_published'];
+    protected $fillable = [ 'title', 'slug', 'description', 'content', 'articel_category_id', 'user_id', 'is_published'];
 
     public function registerMediaConversions(Media $media = null): void
     {

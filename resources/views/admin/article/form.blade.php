@@ -44,6 +44,12 @@
                         </div>
 
                         <div class="mb-4">
+                            <label class="form-label fw-semibold" for="description">Description</label>
+                            <input type="text" id="description" class="form-control" name="description"
+                                placeholder="Judul Arikel..." value="{{ old('description', @$article->description) }}" required>
+                        </div>
+
+                        <div class="mb-4">
                             <label class="form-label fw-semibold" for="category">Category</label>
                             <select name="articel_category_id" class="form-select" aria-label="Select by Category"
                                 required>

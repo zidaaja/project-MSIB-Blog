@@ -18,6 +18,7 @@ return new class extends Migration
             $table->tinyInteger('is_published')->default(0);
             $table->string('title');
             $table->string('slug')->unique();
+            $table->string('description');
             $table->text('content');
             $table->timestamps();
         });

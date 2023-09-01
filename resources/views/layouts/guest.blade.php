@@ -13,7 +13,9 @@
 
         <style>
             .bg-guest {
-              background-image: url({{ asset('dist/assets/img/1920x1080/guest.jpg') }});
+              /* background-image: url({{ asset('dist/assets/img/1920x1080/guest.jpg') }}); */
+              background-image: url({{ asset('assets/css/bg1.jpg') }});
+
             }
           </style>
         <!-- Scripts -->
@@ -21,7 +23,7 @@
 
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="h-screen flex flex-col items-center bg-no-repeat bg-guest p-5">
+        <div class="h-screen flex flex-col items-center bg-no-repeat bg-center bg-cover bg-guest p-5 bg-opacity-50">
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
