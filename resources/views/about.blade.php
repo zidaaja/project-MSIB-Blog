@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Blog</title>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 w-screen overflow-x-hidden">
 
 <!-- Navbar -->
 <nav class="bg-white border-1 p-4 mb-1 sticky top-0 z-10">
@@ -22,15 +22,15 @@
 </nav>
 
 <div class="bg-gradient-to-r from-purple-600 to-transparent">
-  <div class="py-40 text-center bg-cover bg-center opacity-75" style="background-image: url('/assets/css/bg1.jpg')"></div>
-  <div class="mx-20 w-screen absolute top-48">
-      <h1 class="text-5xl font-semibold mb-2 text-white">About Us</h1>
-      <p class="mb-20 text-white text-2xl">Pembuatan website dan aplikasi mobile yang inovatif dan sesuai dengan kebutuhan bisnis Anda.</p>
-    </div>
+        <div class="py-40 text-center bg-cover bg-center opacity-75" style="background-image: url('/assets/css/bg1.jpg')"></div>
+        <div class="mx-3 lg:mx-20 w-screen absolute top-48">
+            <h1 class="text-xl lg:text-5xl font-semibold mb-2 text-white">About Us</h1>
+            <p class="mb-20 text-white text-lg lg:text-2xl">Pembuatan website dan aplikasi mobile yang inovatif dan sesuai dengan kebutuhan bisnis Anda.</p>
+        </div>
 </div>
 
 
-<div class="container mx-auto px-4 py-8">
+<!-- <div class="container mx-auto px-4 py-8">
     <div class="p-6">
         <div class="flex flex-row">
             <div class="flex-1">
@@ -43,10 +43,24 @@
             <div> <img src="{{ ('/assets/css/object-2.png') }}" alt="Blog Post" class="w-50 h-50 object-cover"></div>
         </div>
     </div>
-
+</div> -->
+<div class="container mx-auto px-4 py-8">
+    <div class="p-6 flex flex-col md:flex-row">
+        <div class="flex-1">
+            <h1 class="text-2xl font-bold">We Are IT Specialist</h1>
+            <p class="text-gray-500">
+                Digitaliz adalah Konsultan, Pengembangan Sistem, dan Agen Pemasaran Digital dengan pemahaman tentang pasar Indonesia yang memiliki banyak pengalaman proyek-proyek Nasional. 
+                Digitaliz memberikan solusi terhadap kebutuhan klien dalam membangun departemen informasi dan teknologi dalam menjalankan bisnis klien. Bersama tim yang berpengalaman, Kami menjamin solusi IT terbaik.
+            </p>
+        </div>
+        <div class="md:ml-4 mt-4 md:mt-0"> <!-- Menambahkan margin untuk tampilan mobile -->
+            <img src="/assets/css/object-2.png" alt="Blog Post" class="w-full h-auto object-cover">
+        </div>
+    </div>
 </div>
 
-    </body>
+
+</body>
     <footer class="bg-purple-400 text-white">
           <div class="container mx-auto py-8">
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

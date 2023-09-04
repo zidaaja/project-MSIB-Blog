@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $article = Article::All();
+        $article = Article::paginate(3);
 
         return view('home', ['article' => $article]);
     }

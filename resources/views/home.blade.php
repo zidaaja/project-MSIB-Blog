@@ -59,19 +59,47 @@
         @endphp
         @foreach ($article as $data)
             @if ($counter < 6)
-                <a href="#" class="bg-white rounded-lg overflow-hidden shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-                    <img src="{{ $data->getFirstMediaUrl('image') }}" alt="Blog Post" class="w-full h-48 object-cover object-center">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md transition duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                <img src="{{ $data->getFirstMediaUrl('image') }}" alt="Blog Post" class="w-full h-48 object-cover object-center">
                     <div class="p-6">
                         <h2 class="text-xl font-semibold mb-2">{{ $data -> title}}</h2>
                         <p class="text-gray-600">{{ $data->description }}</p>
                     </div>
-                </a>
+                </div>
                 @php
                     $counter++;
                 @endphp
             @endif
         @endforeach
     </div>
+    
+    <div class="flex justify-center mt-4">
+        <ul class="flex list-none">
+            {{-- Previous Page Link --}}
+            @if ($article->previousPageUrl())
+                <li class="mr-2">
+                    <a href="{{ $article->previousPageUrl() }}" class="text-purple-500 hover:underline">Previous</a>
+                </li>
+            @endif
+
+            {{-- Pagination Elements --}}
+            @foreach ($article->links() as $page => $url)
+                @if (is_string($page))
+                    <li class="mr-2"><span class="px-2 py-1 bg-purple-500 text-white rounded-full">{{ $page }}</span></li>
+                @else
+                    <li class="mr-2"><a href="{{ $url }}" class="px-2 py-1 hover:bg-purple-500 hover:text-white rounded-full">{{ $page }}</a></li>
+                @endif
+            @endforeach
+
+            {{-- Next Page Link --}}
+            @if ($article->nextPageUrl())
+                <li class="mr-2">
+                    <a href="{{ $article->nextPageUrl() }}" class="text-purple-500 hover:underline">Next</a>
+                </li>
+            @endif
+        </ul>
+    </div>
+
     <div class="grid justify-items-end text-purple-500">
         <a href="{{ url('/blog') }}" class="hover:bg-gray-200 px-2 py-2 rounded font-bold">Selengkapnya</a>
     </div>

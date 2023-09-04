@@ -16,41 +16,23 @@
           <input class="card rounded pl-2 py-1 justify border-b-2 border-purple-500 hover:bg-gray-100 px-2 py-2 rounded" type="Search" placeholder="Search">
           <a href="{{ url('/home') }}" class="text-purple-500 mx-2 hover:bg-gray-300 px-1 py-2 rounded">Home</a>
             <a href="{{ url('/blog') }}" class="text-purple-500 hover:bg-gray-300 px-1 py-2 rounded">Blog</a>
-            <a href="#" class="text-purple-500 mx-2 hover:bg-gray-300 px-1 py-2 rounded">About</a>
+            <a href="{{ url('/about') }}" class="text-purple-500 mx-2 hover:bg-gray-300 px-1 py-2 rounded">About</a>
         </div>
     </div>
 </nav>
 
-<!-- Detail Blog -->
-<div class="container mx-auto px-4 py-8">
-
-    <!-- Judul Blog -->
-    <h1 class="text-4xl font-semibold mb-4">Judul Blog</h1>
-
-    <!-- Informasi Penulis & Tanggal -->
-    <p class="text-gray-500 mb-2">Ditulis oleh <span class="font-semibold">Nama Penulis</span> pada <span class="font-semibold">Tanggal</span></p>
-
-    <!-- Konten Blog -->
-    <div class="bg-white rounded-lg shadow p-6">
-        <!-- Konten Utama Blog -->
-        <p class="mb-4">
-            Konten blog
-        </p>
-        
-        <!-- Gambar Blog (jika diperlukan) -->
-        <img src="gambar_blog.jpg" alt="Gambar Blog" class="w-full rounded-lg mb-4">
-
-        <!-- Paragraf Lanjutan -->
-        <p>
-            Paragraf lanjutan untuk konten blog.
-        </p>
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-semibold mb-4">{{ $article->title }}</h1>
+        <p class="text-gray-500 mb-2">Ditulis oleh <span class="font-semibold">Admin</span> pada <span class="font-semibold">{{ $article->created_at }}</span></p>
+        <div class="bg-white rounded-lg shadow p-6">
+            <img src="{{ $article->getFirstMediaUrl('image') }}" alt="Gambar Blog" class="w-50 h-50 mx-auto rounded-lg mb-4">
+            <p>
+                {{ $article -> content}}
+            </p>
+        </div>
     </div>
 
-</div>
-
-
-<!-- Blog List Section -->
-    </body>
+</body>
     <footer class="bg-purple-400 text-white">
           <div class="container mx-auto py-8">
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
